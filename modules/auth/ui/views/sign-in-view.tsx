@@ -5,13 +5,13 @@ import { authClient } from "@/lib/auth-clients";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { OctagonAlert } from "lucide-react";
-import { Component } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import {
@@ -24,15 +24,14 @@ import {
 } from "@/components/ui/form";
 
 
-
 const formSchema =z.object({
     email:z.string().email(),
     password:z.string().min(1,{message:"Password is Required"}),
 });
 
 export const Signinview =()=>{
+    const router =useRouter();
 
-    const router= useRouter();
     const [pending,setPending]=useState(false);
     const [error, setError]=useState<string | null>(null);
 
@@ -52,11 +51,13 @@ export const Signinview =()=>{
         {
         email:data.email,
         password:data.password,
+        callbackURL:"/"
         },
         {
         onSuccess:()=>{
+        router.push("/");
+
             setPending(false); 
-            router.push("/");
         },
         onError:({error})=>
         {
@@ -66,6 +67,29 @@ export const Signinview =()=>{
         }
       );  
     };
+
+     const onSocial=(provider: "github" | "google")=>{
+      setError(null);
+      setPending(true);
+
+      authClient.signIn.social(
+        {
+        provider:provider,
+        callbackURL: "/"
+        },
+        {
+        onSuccess:()=>{
+            setPending(false); 
+        },
+        onError:({error})=>
+        {
+        setPending(false);
+        setError(error.message)
+        }
+        }
+      );  
+    };
+
 
     return(
         <div className="flex flex-col gap-6">
@@ -141,11 +165,13 @@ export const Signinview =()=>{
                                  </span>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                                <Button disabled={pending} variant="outline" type="button" className=" w-full">
-                                    Google
+                                <Button onClick={()=>{onSocial("google")
+                                }} disabled={pending} variant="outline" type="button" className=" w-full">
+                                    <FaGoogle/>
                                 </Button>
-                                <Button disabled={pending} variant="outline" type="button" className=" w-full">
-                                    Github
+                                <Button onClick={()=>{onSocial("github")
+                                }} disabled={pending} variant="outline" type="button" className=" w-full">
+                                    <FaGithub/>
                                 </Button>
                             </div>
                             <div className="text-center text-sm">
