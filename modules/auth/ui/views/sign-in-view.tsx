@@ -1,6 +1,6 @@
 "use client";
 
-import { any, z}  from "zod";
+import { z}  from "zod";
 import { authClient } from "@/lib/auth-clients";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
@@ -146,7 +146,7 @@ export const Signinview =()=>{
                             </div> 
                             {!! error &&(
                                 <Alert className="bg-destructive/10 border-none">
-                                    <OctagonAlert className="h-4 w-4 !text-destructive"/>
+                                    <OctagonAlert className="h-4 w-4 text-destructive!"/>
                                     <AlertTitle>
                                         {error} 
                                     </AlertTitle>
@@ -183,8 +183,8 @@ export const Signinview =()=>{
                          </div>
                     </form>
                     </Form>
-                    <div className="bg-radial from-green-700 to-green-900 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
-                        <img src="/logo.svg" alt="Image" className="h-[92px] w-[92px]"/>
+                    <div className="bg-radial from-sidebar-accent to-sidebar relative hidden md:flex flex-col gap-y-4 items-center justify-center">
+                        <img src="/logo.svg" alt="Image" className="h-23 w-23"/>
                         <p className="text-2xl font-semibold text-white">
                         Meet.AI
                         </p>
