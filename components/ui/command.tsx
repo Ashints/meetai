@@ -38,7 +38,7 @@ function CommandDialog({
   description = "Search for a command to run...",
   children,
   className,
-  showCloseButton = false,
+  showCloseButton = true,
   ...props
 }: React.ComponentProps<typeof Dialog> & {
   title?: string
@@ -52,18 +52,27 @@ function CommandDialog({
         <DialogTitle>{title}</DialogTitle>
         <DialogDescription>{description}</DialogDescription>
       </DialogHeader>
+      {/* 
+        FIX: Force the exact width of your second image layout 
+        using explicit overrides: !w-[550px] !max-w-full 
+      */}
       <DialogContent
         className={cn(
-          "top-1/3 translate-y-0 overflow-hidden rounded-xl! p-0",
+          "top-1/3 left-1/2 -translate-x-1/2 translate-y-0 overflow-hidden rounded-xl! p-0 !w-[550px] !max-w-full border shadow-lg bg-background",
           className
         )}
         showCloseButton={showCloseButton}
       >
-        {children}
+        {/* Force custom styles directly on the children elements */}
+        <Command className="[&_[data-slot=command-item]]:px-4 [&_[data-slot=command-item]]:py-3 [&_[data-slot=command-input]]:h-12 w-full">
+          {children}
+        </Command>
       </DialogContent>
     </Dialog>
   )
 }
+
+
 
 function CommandInput({
   className,
