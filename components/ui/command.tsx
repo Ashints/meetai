@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Command as CommandPrimitive } from "cmdk"
-
+import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
 import {
   Dialog,
@@ -11,6 +11,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Drawer,
+    DrawerContent,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerDescription
+} from "@/components/ui/drawer"
 import {
   InputGroup,
   InputGroupAddon,
@@ -46,6 +52,63 @@ function CommandDialog({
   className?: string
   showCloseButton?: boolean
 }) {
+  return (
+    <Dialog {...props}>
+      <DialogHeader className="sr-only">
+        <DialogTitle>{title}</DialogTitle>
+        <DialogDescription>{description}</DialogDescription>
+      </DialogHeader>
+      {/* 
+        FIX: Force the exact width of your second image layout 
+        using explicit overrides: !w-[550px] !max-w-full 
+      */}
+      <DialogContent
+        className={cn(
+          "top-1/3 left-1/2 -translate-x-1/2 translate-y-0 overflow-hidden rounded-xl! p-0 !w-[550px] !max-w-full border shadow-lg bg-background",
+          className
+        )}
+        showCloseButton={showCloseButton}
+      >
+        {/* Force custom styles directly on the children elements */}
+        <Command className="[&_[data-slot=command-item]]:px-4 [&_[data-slot=command-item]]:py-3 [&_[data-slot=command-input]]:h-12 w-full">
+          {children}
+        </Command>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
+function CommandResponsiveDialog({
+  title = "Command Palette",
+  description = "Search for a command to run...",
+  children,
+  className,
+  showCloseButton = true,
+  ...props
+}: React.ComponentProps<typeof Dialog> & {
+  title?: string
+  description?: string
+  className?: string
+  showCloseButton?: boolean
+}) {
+
+  const isMobile = useIsMobile();
+
+  if(isMobile){
+    return(
+      <Drawer {...props}>
+        <DrawerContent className="overflow-hidden p-0">
+          <DrawerHeader className="sr-only">
+            <DrawerTitle>{title}</DrawerTitle>
+            <DrawerDescription>{description}</DrawerDescription>
+          </DrawerHeader>
+          <Command className="[&_[data-slot=command-item]]:px-4 [&_[data-slot=command-item]]:py-3 [&_[data-slot=command-input]]:h-12 w-full">
+            {children}
+          </Command>
+        </DrawerContent>
+      </Drawer>
+    );
+  }
   return (
     <Dialog {...props}>
       <DialogHeader className="sr-only">
@@ -193,6 +256,7 @@ function CommandShortcut({
 
 export {
   Command,
+  CommandResponsiveDialog,
   CommandDialog,
   CommandInput,
   CommandList,
