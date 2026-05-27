@@ -14,8 +14,6 @@ const page = async() => {
   }
 
 
-  return(
-    <Homeview/>
-  );
-}
+  return <Homeview/>
+};
 export default page
