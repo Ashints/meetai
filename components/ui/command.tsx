@@ -82,12 +82,14 @@ function CommandResponsiveDialog({
   title = "Command Palette",
   description = "Search for a command to run...",
   children,
+  shouldFilter=true,
   className,
   showCloseButton = true,
   ...props
 }: React.ComponentProps<typeof Dialog> & {
   title?: string
   description?: string
+  shouldFilter?: boolean
   className?: string
   showCloseButton?: boolean
 }) {
@@ -102,7 +104,7 @@ function CommandResponsiveDialog({
             <DrawerTitle>{title}</DrawerTitle>
             <DrawerDescription>{description}</DrawerDescription>
           </DrawerHeader>
-          <Command className="[&_[data-slot=command-item]]:px-4 [&_[data-slot=command-item]]:py-3 [&_[data-slot=command-input]]:h-12 w-full">
+          <Command shouldFilter={shouldFilter} className="[&_[data-slot=command-item]]:px-4 [&_[data-slot=command-item]]:py-3 [&_[data-slot=command-input]]:h-12 w-full">
             {children}
           </Command>
         </DrawerContent>
@@ -127,7 +129,7 @@ function CommandResponsiveDialog({
         showCloseButton={showCloseButton}
       >
         {/* Force custom styles directly on the children elements */}
-        <Command className="[&_[data-slot=command-item]]:px-4 [&_[data-slot=command-item]]:py-3 [&_[data-slot=command-input]]:h-12 w-full">
+        <Command shouldFilter={shouldFilter} className="[&_[data-slot=command-item]]:px-4 [&_[data-slot=command-item]]:py-3 [&_[data-slot=command-input]]:h-12 w-full">
           {children}
         </Command>
       </DialogContent>
