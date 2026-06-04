@@ -109,7 +109,7 @@ export const MeetingForm = ({
                     control={form.control}
                     render={({field}) => (
                         <FormItem>
-                            <FormLabel>Agent</FormLabel>
+                            <FormLabel>Name</FormLabel>
                             <FormControl>
                                 <Input{...field} placeholder="e.g. Math Consultations"/>
                             </FormControl>
