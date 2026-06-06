@@ -1,15 +1,13 @@
-import { CircleXIcon,
+import { 
+    CircleXIcon,
     CircleCheckIcon,
-    CircleArrowUpIcon,
+    ClockArrowUpIcon,
     VideoIcon,
     LoaderIcon,
-    ClockArrowUpIcon,
 } from "lucide-react";
 import { CommandSelect } from "@/components/command-select";
 import { MeetingStatus } from "../../types";
 import { useMeetingsFilters } from "../../hooks/use-meetings-filters";
-import { Children } from "react";
-import { meetingStatus } from "@/db/schema";
 
 const options =[
     {
@@ -27,7 +25,7 @@ const options =[
         value: MeetingStatus.Completed,
         children: (
             <div className="flex items-center gap-x-2 capitalize">
-                <ClockArrowUpIcon/>
+                <CircleCheckIcon/>
                 {MeetingStatus.Completed}
             </div>
         ),
@@ -37,7 +35,7 @@ const options =[
         value: MeetingStatus.Active,
         children: (
             <div className="flex items-center gap-x-2 capitalize">
-                <ClockArrowUpIcon/>
+                <VideoIcon/>
                 {MeetingStatus.Active}
             </div>
         ),
@@ -47,7 +45,7 @@ const options =[
         value: MeetingStatus.Processing,
         children: (
             <div className="flex items-center gap-x-2 capitalize">
-                <ClockArrowUpIcon/>
+                <LoaderIcon/>
                 {MeetingStatus.Processing}
             </div>
         ),
@@ -57,7 +55,7 @@ const options =[
         value: MeetingStatus.Cancelled,
         children: (
             <div className="flex items-center gap-x-2 capitalize">
-                <ClockArrowUpIcon/>
+                <CircleXIcon/>
                 {MeetingStatus.Cancelled}
             </div>
         ),

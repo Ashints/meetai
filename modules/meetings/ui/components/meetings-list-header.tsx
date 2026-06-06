@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { PlusIcon ,XCircleIcon} from "lucide-react";
 import { NewMeetingDialog } from "./new-meeting-dialog";
 import { useState } from "react";
-import { MeetingsSearhFilter } from "./meetings-search-filter";
+import { MeetingsSearchFilter } from "./meetings-search-filter";
 import { StatusFilter } from "./status-filter";
 import { AgentIdFilter } from "./agent-id-filter";
 import { useMeetingsFilters } from "../../hooks/use-meetings-filters";
@@ -29,15 +29,15 @@ export const MeetingsListHeader = () =>{
         <NewMeetingDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}/>
         <div className="py-4 px-4 md:px-8 flex flex-col gap-y-4 w-full min-w-0">
             <div className="flex items-center justify-between">
-                <h5 className="font-medium text-xl">My Mettings</h5>
+                <h5 className="font-medium text-xl">My Meetings</h5>
                 <Button onClick={() =>setIsDialogOpen(true)}>
                     <PlusIcon/>
-                    New Metting
+                    New Meeting
                 </Button>
             </div>
             <ScrollArea className="w-full">
             <div className="flex items-center gap-x-2 p-1 w-max">
-                <MeetingsSearhFilter/>
+                <MeetingsSearchFilter/>
                 <StatusFilter/>
                 <AgentIdFilter/>
                 {isAnyFilterModified&&(
