@@ -125,7 +125,7 @@ export const MeetingForm = ({
                         <FormItem>
                             <FormLabel>Agent</FormLabel>
                             <FormControl>
-                                <CommandSelect
+                                <CommandSelect className="w-full"
                                 options={(agents.data?.items ?? []).map((agent) =>({
                                     id: agent.id,
                                     value: agent.id,
