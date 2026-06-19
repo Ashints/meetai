@@ -26,7 +26,9 @@ export const UpcomingState = ({meetingId,onCancelMeeting,isCancelling}:Props)=>{
                     disabled={isCancelling}
                 >
                     <BanIcon className="w-4 h-4 mr-2"/>
+                    <Link href="/meetings">
                     Cancel meeting
+                    </Link>
                 </Button>
                 
                 <Button 
