@@ -16,7 +16,9 @@ import { Sidebar,
     SidebarMenuButton,
     SidebarMenuItem,
  } from "@/components/ui/sidebar";
-import { DashboardUserButton } from "./dashboard-user-button";
+
+ import { DashboardUserButton } from "./dashboard-user-button";
+import { DashboardTrial } from "./dashboard-trials";
 
 const firstSession= [{
     icon: VideoIcon,
@@ -103,7 +105,10 @@ export const DashboardSidebar = ()=>{
             </SidebarGroup>
         </SidebarContent>
         <SidebarFooter className="text-white">
-            <DashboardUserButton/>
+            <div className="p-2">
+                <DashboardTrial/>
+                <DashboardUserButton/>
+            </div>
         </SidebarFooter>
         </Sidebar>
     )
